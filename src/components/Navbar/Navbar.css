@@ -54,15 +54,24 @@
   align-items: center;
   gap: var(--space-5);
   min-width: 0;
-  /* Safety net: if a link's own min-content still doesn't fit at very
-     narrow "desktop" widths, scroll the nav row itself rather than ever
-     letting it wrap or overlap the brand/actions again. */
-  overflow-x: auto;
-  scrollbar-width: none;
 }
 
-.navbar__links::-webkit-scrollbar {
-  display: none;
+/* Horizontal-scroll safety net only in the narrow "in-between" desktop
+   range (below this, nav items shrink to fit; below 768px, .navbar__links
+   is hidden entirely in favor of the mobile menu — see hide-mobile /
+   show-mobile). Scoped to a media query rather than applied unconditionally
+   because `overflow-x: auto` forces `overflow-y` to clip too (CSS spec
+   pairing rule), which was cutting off the Matches dropdown panel at every
+   viewport width, not just the cramped ones this was meant for. */
+@media (max-width: 1200px) {
+  .navbar__links {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .navbar__links::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .navbar__link {
@@ -136,6 +145,20 @@
 .nav-dropdown {
   position: relative;
   flex-shrink: 0;
+}
+
+/* Invisible bridge covering the same vertical gap as .nav-dropdown__panel's
+   margin-top. Without this, moving the mouse from the trigger down toward
+   the panel crosses a strip of empty space that belongs to neither element,
+   which breaks :hover on .nav-dropdown and closes the panel before it can
+   be clicked. */
+.nav-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: var(--space-2);
 }
 
 .nav-dropdown__caret {
