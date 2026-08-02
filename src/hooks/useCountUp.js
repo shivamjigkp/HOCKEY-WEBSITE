@@ -14,7 +14,9 @@ import { animate } from 'framer-motion';
 export function useCountUp(target, { duration = 1.4 } = {}) {
   const ref = useRef(null);
   const [value, setValue] = useState(0);
-  const hasAnimated = useRef(false);
+  const hasIntersected = useRef(false);
+  const controlsRef = useRef(null);
+  const valueRef = useRef(0);
 
   useEffect(() => {
     const node = ref.current;
@@ -23,24 +25,38 @@ export function useCountUp(target, { duration = 1.4 } = {}) {
       return undefined;
     }
 
+    function startAnimation() {
+      if (!Number.isFinite(target)) return;
+      controlsRef.current?.stop();
+      // Animate from wherever it currently is (0 the first time; the
+      // previous target if this runs again after settings finish
+      // loading) rather than always restarting from 0 — the element
+      // may have already been in view with a placeholder value when
+      // the real Supabase value arrives.
+      controlsRef.current = animate(valueRef.current, target, {
+        duration,
+        ease: 'easeOut',
+        onUpdate: (latest) => {
+          valueRef.current = latest;
+          setValue(Math.round(latest));
+        },
+      });
+    }
+
+    // Element was already in view from an earlier effect run (e.g. the
+    // target just changed from a placeholder default to the real
+    // fetched value) — animate to the new target immediately instead of
+    // waiting for another intersection event that may never fire again.
+    if (hasIntersected.current) {
+      startAnimation();
+      return () => controlsRef.current?.stop();
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || hasAnimated.current) return;
-
-        // Guard against animating to an invalid target (e.g. settings
-        // haven't finished loading yet and target is still undefined).
-        // Only commit hasAnimated once we actually have a real number,
-        // so a later re-render with the correct value still animates
-        // in — instead of freezing on "NaN" forever.
-        if (!Number.isFinite(target)) return;
-
-        hasAnimated.current = true;
-        const controls = animate(0, target, {
-          duration,
-          ease: 'easeOut',
-          onUpdate: (latest) => setValue(Math.round(latest)),
-        });
-        node.__countUpControls = controls;
+        if (!entry.isIntersecting) return;
+        hasIntersected.current = true;
+        startAnimation();
       },
       { threshold: 0.4 },
     );
@@ -49,7 +65,7 @@ export function useCountUp(target, { duration = 1.4 } = {}) {
 
     return () => {
       observer.disconnect();
-      node.__countUpControls?.stop();
+      controlsRef.current?.stop();
     };
   }, [target, duration]);
 
