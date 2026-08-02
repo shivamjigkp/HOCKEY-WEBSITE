@@ -23,8 +23,14 @@ const ADMIN_LINKS = [
   { label: 'Settings', to: ROUTES.ADMIN_SETTINGS },
 ];
 
+// Only a superadmin can grant/revoke admin access, so this link is
+// appended conditionally below rather than living in ADMIN_LINKS — a
+// regular admin should never even see it's an option.
+const USERS_LINK = { label: 'Users', to: ROUTES.ADMIN_USERS };
+
 export default function AdminLayout() {
-  const { user, signOut } = useAuth();
+  const { user, isSuperAdmin, signOut } = useAuth();
+  const links = isSuperAdmin ? [...ADMIN_LINKS, USERS_LINK] : ADMIN_LINKS;
 
   return (
     <div className="admin-layout">
@@ -34,7 +40,7 @@ export default function AdminLayout() {
           <p className="admin-layout__user">{user?.email}</p>
 
           <nav className="admin-layout__nav" aria-label="Admin">
-            {ADMIN_LINKS.map((link) => (
+            {links.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}

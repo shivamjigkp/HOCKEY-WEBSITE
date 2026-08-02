@@ -15,8 +15,8 @@
 
 .alumni-page__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-5);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
   margin-top: var(--space-6);
 }
 
@@ -25,13 +25,13 @@
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-5);
+  padding: var(--space-6);
   text-align: center;
 }
 
 .alumnus-card__photo {
-  width: 96px;
-  height: 96px;
+  width: 200px;
+  height: 200px;
   margin-inline: auto;
   border-radius: 50%;
   overflow: hidden;
@@ -39,7 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--pitch-green-600);
+  border: 3px solid var(--pitch-green-600);
 }
 
 .alumnus-card__photo-img {
@@ -50,12 +50,12 @@
 
 .alumnus-card__initial {
   font-family: var(--font-display);
-  font-size: var(--fs-2xl);
+  font-size: var(--fs-4xl);
   color: var(--pitch-green-600);
 }
 
 .alumnus-card__role {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
   font-size: var(--fs-xs);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -63,25 +63,24 @@
 }
 
 .alumnus-card__name {
-  font-size: var(--fs-md);
+  font-size: var(--fs-lg);
   color: var(--text-primary);
   margin-top: var(--space-1);
 }
 
 @media (max-width: 1024px) {
   .alumni-page__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .alumni-page__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .alumni-page__grid {
     grid-template-columns: 1fr;
+  }
+
+  .alumnus-card__photo {
+    width: 160px;
+    height: 160px;
   }
 }

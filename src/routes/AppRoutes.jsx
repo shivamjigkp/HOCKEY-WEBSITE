@@ -32,6 +32,7 @@ import OfficialsManage from '@/pages/Admin/OfficialsManage/OfficialsManage';
 import AlumniManage from '@/pages/Admin/AlumniManage/AlumniManage';
 import MatchesManage from '@/pages/Admin/MatchesManage/MatchesManage';
 import AchievementsManage from '@/pages/Admin/AchievementsManage/AchievementsManage';
+import UsersManage from '@/pages/Admin/UsersManage/UsersManage';
 import SponsorsManage from '@/pages/Admin/SponsorsManage/SponsorsManage';
 import FAQManage from '@/pages/Admin/FAQManage/FAQManage';
 import ContactMessagesManage from '@/pages/Admin/ContactMessagesManage/ContactMessagesManage';
@@ -106,6 +107,14 @@ export default function AppRoutes() {
           <Route path="squad-photos" element={<SquadPhotosManage />} />
           <Route path="roster-highlights" element={<RosterHighlightsManage />} />
           <Route path="settings" element={<SettingsManage />} />
+          <Route
+            path="users"
+            element={
+              <ProtectedRoute requireSuperAdmin>
+                <UsersManage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />

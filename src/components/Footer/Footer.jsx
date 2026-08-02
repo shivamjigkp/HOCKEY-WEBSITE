@@ -1,18 +1,19 @@
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 import SponsorsStrip from '@/components/SponsorsStrip/SponsorsStrip';
+import { getVisitCount, incrementVisitCount } from '@/services/visits';
 import logo from '@/assets/images/mmmut-hockey-logo.png';
 import './Footer.css';
 
+// Deliberately excludes anything already directly visible in the navbar
+// (Home, Officials, Matches/Live/Highlights/Results, Tournament History,
+// Players, Alumni, Gallery) — a footer link to something one click away
+// in the header is just noise.
 const QUICK_LINKS = [
-  { label: 'Players', to: ROUTES.PLAYERS },
-  { label: 'Officials', to: ROUTES.OFFICIALS },
   { label: 'Statistics', to: ROUTES.STATISTICS },
-  { label: 'Matches', to: ROUTES.MATCHES },
-  { label: 'Tournament History', to: ROUTES.TOURNAMENT_HISTORY },
   { label: 'Achievements', to: ROUTES.ACHIEVEMENTS },
-  { label: 'Gallery', to: ROUTES.GALLERY },
   { label: 'News', to: ROUTES.NEWS },
   { label: 'Events', to: ROUTES.EVENTS },
 ];
@@ -26,11 +27,34 @@ const USEFUL_LINKS = [
 export default function Footer() {
   const year = new Date().getFullYear();
   const settings = useSiteSettings();
+  const [visitCount, setVisitCount] = useState(null);
   const socialLinks = [
     { label: 'Instagram', href: settings.instagram },
     { label: 'Facebook', href: settings.facebook },
     { label: 'YouTube', href: settings.youtube },
   ];
+
+  useEffect(() => {
+    let isMounted = true;
+    const alreadyCountedThisSession = sessionStorage.getItem('mmmut_visit_counted');
+
+    const promise = alreadyCountedThisSession
+      ? getVisitCount()
+      : incrementVisitCount().then((count) => {
+          sessionStorage.setItem('mmmut_visit_counted', '1');
+          return count;
+        });
+
+    promise
+      .then((count) => {
+        if (isMounted) setVisitCount(count);
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <footer className="footer">
@@ -106,6 +130,9 @@ export default function Footer() {
           </a>
           , Hockey Technical Member Head
         </p>
+        {visitCount != null && (
+          <p className="footer__visits">{visitCount.toLocaleString()} visits</p>
+        )}
       </div>
     </footer>
   );

@@ -5,13 +5,16 @@ import Loader from '@/components/Loader/Loader';
 
 /**
  * Wrap any route element needing a signed-in user. Pass `requireAdmin` to
- * additionally require role === 'admin' (see profiles table in
- * schema_phase7.sql) — a signed-in non-admin sees an inline "Access
- * Denied" message rather than being bounced back to Login, since they
- * *are* authenticated, just not authorized for this route.
+ * additionally require role 'admin' or 'superadmin' (see profiles table
+ * in schema_phase7.sql / schema_phase22.sql), or `requireSuperAdmin` for
+ * the stricter 'superadmin'-only check (used for the Users page — only a
+ * superadmin can grant or revoke admin access). A signed-in user who
+ * fails either check sees an inline "Access Denied" message rather than
+ * being bounced back to Login, since they *are* authenticated, just not
+ * authorized for this route.
  */
-export default function ProtectedRoute({ children, requireAdmin = false }) {
-  const { isAuthenticated, isAdmin, isLoading } = useAuth();
+export default function ProtectedRoute({ children, requireAdmin = false, requireSuperAdmin = false }) {
+  const { isAuthenticated, isAdmin, isSuperAdmin, isLoading } = useAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -22,13 +25,17 @@ export default function ProtectedRoute({ children, requireAdmin = false }) {
     return <Navigate to={ROUTES.LOGIN} state={{ from: location }} replace />;
   }
 
-  if (requireAdmin && !isAdmin) {
+  const isDenied = requireSuperAdmin ? !isSuperAdmin : requireAdmin && !isAdmin;
+
+  if (isDenied) {
     return (
       <div className="container" style={{ paddingBlock: 'var(--space-8)', textAlign: 'center' }}>
         <p className="eyebrow">Access Denied</p>
-        <h1 style={{ marginTop: 'var(--space-4)' }}>Admin access required</h1>
+        <h1 style={{ marginTop: 'var(--space-4)' }}>
+          {requireSuperAdmin ? 'Superadmin access required' : 'Admin access required'}
+        </h1>
         <p style={{ marginTop: 'var(--space-3)', color: 'var(--text-secondary)' }}>
-          Your account doesn&apos;t have admin permissions for this page.
+          Your account doesn&apos;t have permission for this page.
         </p>
       </div>
     );

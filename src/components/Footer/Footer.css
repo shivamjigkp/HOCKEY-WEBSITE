@@ -89,9 +89,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-4);
   padding-block: var(--space-5);
   border-top: 1px solid rgba(223, 233, 242, 0.12);
   font-size: var(--fs-xs);
+}
+
+.footer__visits {
+  color: var(--pitch-frost-300);
+  white-space: nowrap;
 }
 
 .footer__credits a {

@@ -48,4 +48,5 @@ export const ROUTES = {
   ADMIN_SQUAD_PHOTOS: '/admin/squad-photos',
   ADMIN_ROSTER_HIGHLIGHTS: '/admin/roster-highlights',
   ADMIN_SETTINGS: '/admin/settings',
+  ADMIN_USERS: '/admin/users',
 };
