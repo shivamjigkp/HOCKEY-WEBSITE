@@ -7,19 +7,25 @@ import CursorToggle from '@/components/CursorToggle/CursorToggle';
 import logo from '@/assets/images/mmmut-hockey-logo.png';
 import './Navbar.css';
 
+// Everything not listed here (Achievements, Statistics, News, Events,
+// About, FAQ, Contact) still lives in the Footer's Quick Links / Useful
+// Links columns — this is deliberately just the primary wayfinding set.
 const PRIMARY_LINKS = [
   { label: 'Home', to: ROUTES.HOME },
-  { label: 'Players', to: ROUTES.PLAYERS },
   { label: 'Officials', to: ROUTES.OFFICIALS },
-  { label: 'Matches', to: ROUTES.MATCHES },
-  { label: 'Results', to: ROUTES.RESULTS },
-  { label: 'Live', to: ROUTES.LIVE },
-  { label: 'Highlights', to: ROUTES.VIDEOS },
-  { label: 'Achievements', to: ROUTES.ACHIEVEMENTS },
+  {
+    label: 'Matches',
+    to: ROUTES.MATCHES,
+    children: [
+      { label: 'Live', to: ROUTES.LIVE },
+      { label: 'Highlights', to: ROUTES.VIDEOS },
+      { label: 'Results', to: ROUTES.RESULTS },
+    ],
+  },
+  { label: 'Tournament History', to: ROUTES.TOURNAMENT_HISTORY },
+  { label: 'Players', to: ROUTES.PLAYERS },
+  { label: 'Alumni', to: ROUTES.ALUMNI },
   { label: 'Gallery', to: ROUTES.GALLERY },
-  { label: 'News', to: ROUTES.NEWS },
-  { label: 'Events', to: ROUTES.EVENTS },
-  { label: 'Contact', to: ROUTES.CONTACT },
 ];
 
 export default function Navbar() {
@@ -44,17 +50,45 @@ export default function Navbar() {
         </NavLink>
 
         <nav className="navbar__links hide-mobile" aria-label="Primary">
-          {PRIMARY_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) =>
-                isActive ? 'navbar__link navbar__link--active' : 'navbar__link'
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+          {PRIMARY_LINKS.map((link) =>
+            link.children ? (
+              <div className="nav-dropdown" key={link.to}>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) =>
+                    isActive ? 'navbar__link navbar__link--active' : 'navbar__link'
+                  }
+                >
+                  {link.label}
+                  <span className="nav-dropdown__caret" aria-hidden="true">
+                    ▾
+                  </span>
+                </NavLink>
+                <div className="nav-dropdown__panel" role="menu">
+                  {link.children.map((child) => (
+                    <NavLink
+                      key={child.to}
+                      to={child.to}
+                      className="nav-dropdown__item"
+                      role="menuitem"
+                    >
+                      {child.label}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) =>
+                  isActive ? 'navbar__link navbar__link--active' : 'navbar__link'
+                }
+              >
+                {link.label}
+              </NavLink>
+            )
+          )}
         </nav>
 
         <div className="navbar__actions">
@@ -96,18 +130,33 @@ export default function Navbar() {
       {isMenuOpen && (
         <nav className="navbar__mobile-menu show-mobile" aria-label="Mobile">
           {PRIMARY_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) =>
-                isActive
-                  ? 'navbar__mobile-link navbar__mobile-link--active'
-                  : 'navbar__mobile-link'
-              }
-              onClick={closeMenu}
-            >
-              {link.label}
-            </NavLink>
+            <div key={link.to} className="navbar__mobile-group">
+              <NavLink
+                to={link.to}
+                className={({ isActive }) =>
+                  isActive
+                    ? 'navbar__mobile-link navbar__mobile-link--active'
+                    : 'navbar__mobile-link'
+                }
+                onClick={closeMenu}
+              >
+                {link.label}
+              </NavLink>
+              {link.children && (
+                <div className="navbar__mobile-submenu">
+                  {link.children.map((child) => (
+                    <NavLink
+                      key={child.to}
+                      to={child.to}
+                      className="navbar__mobile-sublink"
+                      onClick={closeMenu}
+                    >
+                      {child.label}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
           {isAuthenticated ? (
             <>

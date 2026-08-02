@@ -6,6 +6,7 @@ import PlayerDetails from '@/pages/PlayerDetails/PlayerDetails';
 import Achievements from '@/pages/Achievements/Achievements';
 import Statistics from '@/pages/Statistics/Statistics';
 import Officials from '@/pages/Officials/Officials';
+import Alumni from '@/pages/Alumni/Alumni';
 import Matches from '@/pages/Matches/Matches';
 import TournamentHistory from '@/pages/TournamentHistory/TournamentHistory';
 import Results from '@/pages/Results/Results';
@@ -28,6 +29,7 @@ import NewsManage from '@/pages/Admin/NewsManage/NewsManage';
 import EventsManage from '@/pages/Admin/EventsManage/EventsManage';
 import PlayersManage from '@/pages/Admin/PlayersManage/PlayersManage';
 import OfficialsManage from '@/pages/Admin/OfficialsManage/OfficialsManage';
+import AlumniManage from '@/pages/Admin/AlumniManage/AlumniManage';
 import MatchesManage from '@/pages/Admin/MatchesManage/MatchesManage';
 import AchievementsManage from '@/pages/Admin/AchievementsManage/AchievementsManage';
 import SponsorsManage from '@/pages/Admin/SponsorsManage/SponsorsManage';
@@ -62,6 +64,7 @@ export default function AppRoutes() {
         <Route path={ROUTES.LIVE} element={<Live />} />
         <Route path={ROUTES.VIDEOS} element={<Videos />} />
         <Route path={ROUTES.GALLERY} element={<Gallery />} />
+        <Route path={ROUTES.ALUMNI} element={<Alumni />} />
         <Route path={ROUTES.GALLERY_ALBUM} element={<AlbumDetail />} />
         <Route
           path={ROUTES.GALLERY_MANAGE}
@@ -92,6 +95,7 @@ export default function AppRoutes() {
           <Route path="events" element={<EventsManage />} />
           <Route path="players" element={<PlayersManage />} />
           <Route path="officials" element={<OfficialsManage />} />
+          <Route path="alumni" element={<AlumniManage />} />
           <Route path="matches" element={<MatchesManage />} />
           <Route path="achievements" element={<AchievementsManage />} />
           <Route path="sponsors" element={<SponsorsManage />} />

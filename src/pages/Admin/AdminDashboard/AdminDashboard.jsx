@@ -24,6 +24,11 @@ const SHORTCUTS = [
     to: ROUTES.ADMIN_OFFICIALS,
   },
   {
+    label: 'Alumni',
+    description: 'Manage the alumni directory — add, edit, or remove alumni.',
+    to: ROUTES.ADMIN_ALUMNI,
+  },
+  {
     label: 'Matches',
     description: 'Schedule fixtures and control live scores on matchday.',
     to: ROUTES.ADMIN_MATCHES,
