@@ -4,7 +4,7 @@ import { supabase } from '@/config/supabaseClient';
  * Gallery data service. Components must go through this file — never call
  * `supabase.from(...)` or `supabase.storage` directly.
  *
- * Unlike players/matches/coaches, this is backed by a real Supabase project
+ * Unlike players/matches/officials, this is backed by a real Supabase project
  * (see supabase/schema.sql) since Gallery is the first module built after
  * Storage + write access became necessary.
  */

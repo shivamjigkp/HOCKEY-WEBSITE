@@ -6,10 +6,20 @@
   color: var(--text-secondary);
 }
 
-.image-upload-field__body {
+.image-upload-field__dropzone {
   display: flex;
   align-items: center;
   gap: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px dashed transparent;
+  transition: border-color var(--duration-base) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard);
+}
+
+.image-upload-field__dropzone--active {
+  border-color: var(--color-brand);
+  background-color: color-mix(in srgb, var(--color-brand) 8%, transparent);
 }
 
 .image-upload-field__preview {

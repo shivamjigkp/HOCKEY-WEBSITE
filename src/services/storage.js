@@ -3,7 +3,7 @@ import { compressImage } from '@/utils/imageCompression';
 
 /**
  * Generic photo-upload service backing any admin form that needs a
- * single image field (Players, Coaches, News cover image, and future
+ * single image field (Players, Officials, News cover image, and future
  * additions) — mirrors the album-scoped uploader in services/gallery.js
  * but isn't tied to an album, just a folder prefix inside the shared
  * `site-images` bucket (see the storage section in schema_phase8.sql).
@@ -16,7 +16,7 @@ const BUCKET = 'site-images';
 
 /**
  * @param {File} file
- * @param {string} folder e.g. 'players', 'coaches', 'news'
+ * @param {string} folder e.g. 'players', 'officials', 'news'
  * @returns {Promise<string>} the uploaded image's public URL
  */
 export async function uploadSiteImage(file, folder) {

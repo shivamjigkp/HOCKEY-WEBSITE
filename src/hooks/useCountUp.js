@@ -19,28 +19,21 @@ export function useCountUp(target, { duration = 1.4 } = {}) {
   useEffect(() => {
     const node = ref.current;
     if (!node || typeof IntersectionObserver === 'undefined') {
-      setValue(Number.isFinite(target) ? target : 0);
+      setValue(target);
       return undefined;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || hasAnimated.current) return;
-
-        // Guard against animating to an invalid target (e.g. settings
-        // haven't finished loading yet and target is still undefined).
-        // Only commit hasAnimated once we actually have a real number,
-        // so a later re-render with the correct value still animates
-        // in — instead of freezing on "NaN" forever.
-        if (!Number.isFinite(target)) return;
-
-        hasAnimated.current = true;
-        const controls = animate(0, target, {
-          duration,
-          ease: 'easeOut',
-          onUpdate: (latest) => setValue(Math.round(latest)),
-        });
-        node.__countUpControls = controls;
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          const controls = animate(0, target, {
+            duration,
+            ease: 'easeOut',
+            onUpdate: (latest) => setValue(Math.round(latest)),
+          });
+          node.__countUpControls = controls;
+        }
       },
       { threshold: 0.4 },
     );

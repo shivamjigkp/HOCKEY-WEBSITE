@@ -19,9 +19,9 @@ const SHORTCUTS = [
     to: ROUTES.ADMIN_PLAYERS,
   },
   {
-    label: 'Coaches',
-    description: 'Manage the coaching staff.',
-    to: ROUTES.ADMIN_COACHES,
+    label: 'Officials',
+    description: 'Manage coaching and support staff — add, edit, or remove officials.',
+    to: ROUTES.ADMIN_OFFICIALS,
   },
   {
     label: 'Matches',

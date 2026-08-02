@@ -7,7 +7,7 @@ import './Footer.css';
 
 const QUICK_LINKS = [
   { label: 'Players', to: ROUTES.PLAYERS },
-  { label: 'Coaches', to: ROUTES.COACHES },
+  { label: 'Officials', to: ROUTES.OFFICIALS },
   { label: 'Statistics', to: ROUTES.STATISTICS },
   { label: 'Matches', to: ROUTES.MATCHES },
   { label: 'Tournament History', to: ROUTES.TOURNAMENT_HISTORY },
