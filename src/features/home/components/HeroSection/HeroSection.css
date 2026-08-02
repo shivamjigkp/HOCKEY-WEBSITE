@@ -55,6 +55,28 @@
   flex-wrap: wrap;
 }
 
+/* The hero background is always dark (see .hero above) regardless of the
+   site's light/dark theme toggle, but .btn-outline and .eyebrow normally
+   pull theme-dependent tokens (--text-primary / --surface-border /
+   --color-brand). In light mode those resolve to near-black, which made
+   "Meet the Team" nearly invisible against the dark hero. Scope explicit
+   light-on-dark colors here instead. */
+.hero .btn-outline {
+  color: var(--pitch-chalk-100);
+  border-color: rgba(245, 246, 246, 0.4);
+}
+
+.hero .btn-outline:hover {
+  color: var(--pitch-gold-500);
+  border-color: var(--pitch-gold-500);
+}
+
+.hero .eyebrow {
+  color: var(--pitch-gold-500);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
 @media (max-width: 768px) {
   .hero {
     padding-block: var(--space-8);

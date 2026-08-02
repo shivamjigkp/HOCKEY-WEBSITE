@@ -10,7 +10,7 @@ import './Navbar.css';
 const PRIMARY_LINKS = [
   { label: 'Home', to: ROUTES.HOME },
   { label: 'Players', to: ROUTES.PLAYERS },
-  { label: 'Officials', to: ROUTES.OFFICIALS },
+  { label: 'Coaches', to: ROUTES.COACHES },
   { label: 'Matches', to: ROUTES.MATCHES },
   { label: 'Results', to: ROUTES.RESULTS },
   { label: 'Live', to: ROUTES.LIVE },
