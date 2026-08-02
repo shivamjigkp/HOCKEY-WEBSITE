@@ -18,8 +18,8 @@
 
 .squad-photo-gallery__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
 }
 
 .squad-photo-gallery__container h3 {
@@ -28,22 +28,43 @@
   margin-bottom: var(--space-3);
 }
 
+/* Sized a step smaller than HeroSlideshow's frame (min(72vh, 640px)) but
+   using the same "never crop the photo" treatment: a blurred, scaled-up
+   copy of the photo fills the box edge-to-edge as a backdrop, and the real
+   photo sits on top at object-fit: contain so the whole group photo is
+   always visible regardless of its aspect ratio. */
 .squad-photo-gallery__display {
   position: relative;
-  aspect-ratio: 4 / 3;
+  height: min(50vh, 440px);
+  min-height: 280px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--pitch-charcoal-900);
 }
 
-.squad-photo-gallery__display img {
+.squad-photo-gallery__backdrop {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: blur(24px) brightness(0.55) saturate(1.1);
+  transform: scale(1.15);
+  z-index: 0;
+}
+
+.squad-photo-gallery__photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  z-index: 1;
 }
 
 .squad-photo-gallery__placeholder {
-  aspect-ratio: 4 / 3;
+  height: min(50vh, 440px);
+  min-height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;

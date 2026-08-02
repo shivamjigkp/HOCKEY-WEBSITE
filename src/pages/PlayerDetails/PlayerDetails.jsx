@@ -84,7 +84,9 @@ export default function PlayerDetails() {
             <p className="eyebrow">{PLAYER_POSITION_LABELS[player.position] ?? player.position}</p>
             <h1 className="player-details__name">{player.name}</h1>
             <p className="player-details__meta">
-              #{player.jerseyNumber} · {player.year} · {player.hometown}
+              #{player.jerseyNumber} · {player.year}
+              {player.branch && ` · ${player.branch}`}
+              {player.hometown && ` · ${player.hometown}`}
             </p>
           </div>
         </div>

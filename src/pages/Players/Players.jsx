@@ -4,16 +4,16 @@ import PlayerCard from '@/components/PlayerCard/PlayerCard';
 import Loader from '@/components/Loader/Loader';
 import SectionDivider from '@/components/SectionDivider/SectionDivider';
 import SquadPhotoGallery from '@/features/players/components/SquadPhotoGallery/SquadPhotoGallery';
-import { PLAYER_POSITION_FILTERS } from '@/constants/playerPositions';
+import { PLAYER_LINE_FILTERS } from '@/constants/playerPositions';
 import { getPlayers } from '@/services/players';
 import './Players.css';
 
 const PAGE_SIZE = 8;
 
 const SORT_OPTIONS = [
-  { value: 'name', label: 'Name (A–Z)' },
+  { value: 'name', label: 'Name' },
   { value: 'jersey', label: 'Jersey Number' },
-  { value: 'points', label: 'Points (High–Low)' },
+  { value: 'points', label: 'Points' },
 ];
 
 export default function Players() {
@@ -25,6 +25,7 @@ export default function Players() {
 
   const activeFilter = searchParams.get('position') ?? 'all';
   const activeSort = searchParams.get('sort') ?? 'name';
+  const activeDirection = searchParams.get('dir') ?? 'asc';
 
   useEffect(() => {
     let isMounted = true;
@@ -44,13 +45,14 @@ export default function Players() {
   // Reset to page 1 whenever the result set would change shape.
   useEffect(() => {
     setPage(1);
-  }, [activeFilter, activeSort, searchTerm]);
+  }, [activeFilter, activeSort, activeDirection, searchTerm]);
 
   const filteredPlayers = useMemo(() => {
     let result = players;
 
-    if (activeFilter !== 'all') {
-      result = result.filter((player) => player.position === activeFilter);
+    const lineFilter = PLAYER_LINE_FILTERS.find((f) => f.value === activeFilter);
+    if (lineFilter?.positions) {
+      result = result.filter((player) => lineFilter.positions.includes(player.position));
     }
 
     if (searchTerm.trim()) {
@@ -67,8 +69,12 @@ export default function Players() {
       sorted.sort((a, b) => (b.stats?.points ?? 0) - (a.stats?.points ?? 0));
     }
 
+    if (activeDirection === 'desc') {
+      sorted.reverse();
+    }
+
     return sorted;
-  }, [players, activeFilter, searchTerm, activeSort]);
+  }, [players, activeFilter, searchTerm, activeSort, activeDirection]);
 
   const totalPages = Math.max(1, Math.ceil(filteredPlayers.length / PAGE_SIZE));
   const visiblePlayers = filteredPlayers.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -89,6 +95,16 @@ export default function Players() {
       next.delete('sort');
     } else {
       next.set('sort', value);
+    }
+    setSearchParams(next);
+  };
+
+  const handleDirectionToggle = () => {
+    const next = new URLSearchParams(searchParams);
+    if (activeDirection === 'desc') {
+      next.delete('dir');
+    } else {
+      next.set('dir', 'desc');
     }
     setSearchParams(next);
   };
@@ -122,10 +138,20 @@ export default function Players() {
               </option>
             ))}
           </select>
+
+          <button
+            type="button"
+            className="players-page__direction"
+            onClick={handleDirectionToggle}
+            aria-label={activeDirection === 'asc' ? 'Sort ascending' : 'Sort descending'}
+            title={activeDirection === 'asc' ? 'Ascending' : 'Descending'}
+          >
+            {activeDirection === 'asc' ? '↑ Asc' : '↓ Desc'}
+          </button>
         </div>
 
         <div className="players-page__filters" role="tablist" aria-label="Filter by position">
-          {PLAYER_POSITION_FILTERS.map((filter) => (
+          {PLAYER_LINE_FILTERS.map((filter) => (
             <button
               key={filter.value}
               type="button"

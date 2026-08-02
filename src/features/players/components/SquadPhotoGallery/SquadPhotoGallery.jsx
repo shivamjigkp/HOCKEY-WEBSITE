@@ -33,7 +33,8 @@ function ContainerSlideshow({ container }) {
 
   return (
     <div className="squad-photo-gallery__display">
-      <img src={photo.url} alt={container.title} loading="lazy" />
+      <img src={photo.url} alt="" aria-hidden="true" className="squad-photo-gallery__backdrop" />
+      <img src={photo.url} alt={container.title} loading="lazy" className="squad-photo-gallery__photo" />
       {container.slideshow_enabled && sortedPhotos.length > 1 && (
         <div className="squad-photo-gallery__dots">
           {sortedPhotos.map((p, i) => (

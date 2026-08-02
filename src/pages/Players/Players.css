@@ -43,6 +43,24 @@
   cursor: pointer;
 }
 
+.players-page__direction {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-alt);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.players-page__direction:hover {
+  border-color: var(--pitch-green-600);
+}
+
 .players-page__filters {
   display: flex;
   flex-wrap: wrap;

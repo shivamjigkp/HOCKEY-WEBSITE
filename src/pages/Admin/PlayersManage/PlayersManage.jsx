@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import Loader from '@/components/Loader/Loader';
 import ImageUploadField from '@/components/ImageUploadField/ImageUploadField';
 import { getPlayers, createPlayer, updatePlayer, deletePlayer } from '@/services/players';
+import { PLAYER_POSITION_GROUPS, PLAYER_POSITION_LABELS } from '@/constants/playerPositions';
 import '../adminManage.css';
 
 const EMPTY_FORM = {
   name: '',
-  position: 'forward',
+  position: 'centre_forward',
+  branch: '',
   jerseyNumber: '',
   year: '',
   hometown: '',
@@ -44,6 +46,7 @@ export default function PlayersManage() {
     setForm({
       name: player.name,
       position: player.position,
+      branch: player.branch ?? '',
       jerseyNumber: String(player.jerseyNumber ?? ''),
       year: player.year ?? '',
       hometown: player.hometown ?? '',
@@ -117,11 +120,26 @@ export default function PlayersManage() {
         <label className="admin-manage__field">
           <span>Position</span>
           <select value={form.position} onChange={handleChange('position')}>
-            <option value="forward">Forward</option>
-            <option value="midfielder">Midfielder</option>
-            <option value="defender">Defender</option>
-            <option value="goalkeeper">Goalkeeper</option>
+            {PLAYER_POSITION_GROUPS.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.options.map((value) => (
+                  <option key={value} value={value}>
+                    {PLAYER_POSITION_LABELS[value]}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
           </select>
+        </label>
+
+        <label className="admin-manage__field">
+          <span>Branch</span>
+          <input
+            type="text"
+            placeholder="e.g. Computer Science"
+            value={form.branch}
+            onChange={handleChange('branch')}
+          />
         </label>
 
         <label className="admin-manage__field">
@@ -187,7 +205,8 @@ export default function PlayersManage() {
                   #{player.jerseyNumber} {player.name}
                 </p>
                 <p className="admin-manage__row-meta">
-                  {player.position} · {player.year || 'Year TBC'}
+                  {PLAYER_POSITION_LABELS[player.position] ?? player.position}
+                  {player.branch && ` · ${player.branch}`} · {player.year || 'Year TBC'}
                 </p>
               </div>
               <div className="admin-manage__row-actions">

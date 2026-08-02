@@ -33,6 +33,7 @@ export default function PlayerCard({ player, variant = 'default' }) {
       {variant === 'default' && (
         <>
           <p className="player-card__meta">
+            {player.branch && `${player.branch} · `}
             {player.year} · #{player.jerseyNumber}
           </p>
           <p className="player-card__stat">

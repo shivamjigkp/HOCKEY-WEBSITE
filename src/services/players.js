@@ -18,6 +18,7 @@ function mapRow(row) {
     id: row.id,
     name: row.name,
     position: row.position,
+    branch: row.branch,
     jerseyNumber: row.jersey_number,
     year: row.year,
     hometown: row.hometown,
@@ -68,6 +69,7 @@ export async function getFeaturedPlayers(count = 4) {
 export async function createPlayer({
   name,
   position,
+  branch,
   jerseyNumber,
   year,
   hometown,
@@ -81,6 +83,7 @@ export async function createPlayer({
     .insert({
       name,
       position,
+      branch: branch || null,
       jersey_number: jerseyNumber,
       year,
       hometown,
@@ -102,6 +105,7 @@ export async function updatePlayer(id, payload) {
     .update({
       name: payload.name,
       position: payload.position,
+      branch: payload.branch || null,
       jersey_number: payload.jerseyNumber,
       year: payload.year,
       hometown: payload.hometown,

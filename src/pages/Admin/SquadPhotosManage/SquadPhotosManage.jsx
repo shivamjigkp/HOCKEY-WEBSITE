@@ -224,7 +224,7 @@ export default function SquadPhotosManage() {
       <p className="admin-manage__note">
         Group photo containers shown on the public Players page, below the roster (Final Year,
         3rd Year Boys/Girls, 2nd Year Boys/Girls by default — add or remove containers freely).
-        Each container's Slideshow toggle is OFF by default, showing only the photo you set as
+        Each container&apos;s Slideshow toggle is OFF by default, showing only the photo you set as
         Order 1. Turn it ON to auto-cycle through every photo in that container.
       </p>
 
