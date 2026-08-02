@@ -230,14 +230,18 @@
 .navbar__burger {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: var(--space-2);
+  justify-content: center;
+  gap: 5px;
+  padding: var(--space-3);
+  margin: calc(var(--space-3) * -1);
 }
 
 .navbar__burger span {
-  width: 20px;
+  width: 22px;
   height: 2px;
+  border-radius: 1px;
   background-color: var(--text-primary);
+  transition: background-color var(--duration-fast) var(--ease-standard);
 }
 
 .navbar__mobile-menu {
@@ -290,4 +294,20 @@
 
 .navbar__mobile-sublink:hover {
   color: var(--text-primary);
+}
+
+/* .show-mobile's generic rule is `display: revert !important`, which for
+   a <button>/<nav> reverts to the browser's UA default display (roughly
+   inline-block / block) — not the flex layout these two actually need.
+   That silently broke the hamburger's 3-bar icon and the mobile menu's
+   column layout, which is why the mobile nav effectively disappeared.
+   Higher-specificity + !important here wins over the utility rule. */
+@media (max-width: 768px) {
+  .navbar__burger.show-mobile {
+    display: flex !important;
+  }
+
+  .navbar__mobile-menu.show-mobile {
+    display: flex !important;
+  }
 }
