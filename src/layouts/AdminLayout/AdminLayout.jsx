@@ -8,7 +8,7 @@ const ADMIN_LINKS = [
   { label: 'News & Announcements', to: ROUTES.ADMIN_NEWS },
   { label: 'Events', to: ROUTES.ADMIN_EVENTS },
   { label: 'Players', to: ROUTES.ADMIN_PLAYERS },
-  { label: 'Coaches', to: ROUTES.ADMIN_COACHES },
+  { label: 'Officials', to: ROUTES.ADMIN_OFFICIALS },
   { label: 'Matches', to: ROUTES.ADMIN_MATCHES },
   { label: 'Gallery', to: ROUTES.GALLERY_MANAGE },
   { label: 'Achievements', to: ROUTES.ADMIN_ACHIEVEMENTS },
