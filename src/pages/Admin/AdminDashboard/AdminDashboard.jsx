@@ -49,6 +49,11 @@ const SHORTCUTS = [
     to: ROUTES.ADMIN_SQUAD_PHOTOS,
   },
   {
+    label: 'Alumni Group Photos',
+    description: 'Manage the batch/reunion photo slideshow shown on the public Alumni page.',
+    to: ROUTES.ADMIN_ALUMNI_GROUP_PHOTOS,
+  },
+  {
     label: 'Achievements',
     description: 'Manage tournament records and University/Team/Player/Coach achievements.',
     to: ROUTES.ADMIN_ACHIEVEMENTS,

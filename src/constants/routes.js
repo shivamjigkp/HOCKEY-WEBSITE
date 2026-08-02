@@ -46,6 +46,7 @@ export const ROUTES = {
   ADMIN_VIDEOS: '/admin/videos',
   ADMIN_HERO_SLIDES: '/admin/hero-slides',
   ADMIN_SQUAD_PHOTOS: '/admin/squad-photos',
+  ADMIN_ALUMNI_GROUP_PHOTOS: '/admin/alumni-group-photos',
   ADMIN_ROSTER_HIGHLIGHTS: '/admin/roster-highlights',
   ADMIN_SETTINGS: '/admin/settings',
   ADMIN_USERS: '/admin/users',

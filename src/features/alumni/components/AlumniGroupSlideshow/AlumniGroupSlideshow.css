@@ -1,0 +1,182 @@
+.alumni-group-slideshow {
+  margin-top: var(--space-9);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--surface-border);
+}
+
+.alumni-group-slideshow__title {
+  font-size: var(--fs-xl);
+  color: var(--text-primary);
+}
+
+.alumni-group-slideshow__subtitle {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-6);
+}
+
+/*
+ * Sized a step bigger than SquadPhotoGallery's frame (min(50vh, 440px))
+ * and a step smaller than HeroSlideshow's (min(72vh, 640px)) — group
+ * photos need real room to read faces clearly, but this isn't the
+ * homepage's lead visual. See AlumniGroupSlideshow.jsx for the full
+ * rationale/size chain.
+ */
+.alumni-group-slideshow__frame {
+  position: relative;
+  width: 100%;
+  height: min(60vh, 560px);
+  min-height: 320px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--pitch-charcoal-900);
+}
+
+.alumni-group-slideshow__slide {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 900ms var(--ease-standard);
+}
+
+.alumni-group-slideshow__slide--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/*
+ * Two-layer image treatment (same as HeroSlideshow/SquadPhotoGallery) so
+ * a slide always looks intentional whichever orientation an admin
+ * uploads — a blurred, scaled-up copy of the photo fills the frame
+ * edge-to-edge as a backdrop (no empty letterbox space), and the real
+ * photo sits on top at object-fit: contain so the *entire* group photo
+ * is always visible, uncropped — nobody gets cut out of the frame.
+ */
+.alumni-group-slideshow__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(28px) brightness(0.55) saturate(1.1);
+  transform: scale(1.15);
+  z-index: 0;
+}
+
+.alumni-group-slideshow__photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  z-index: 1;
+}
+
+.alumni-group-slideshow__slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16, 19, 21, 0) 60%, rgba(16, 19, 21, 0.8) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.alumni-group-slideshow__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  color: var(--pitch-chalk-50);
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.alumni-group-slideshow__arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 246, 246, 0.35);
+  background: rgba(16, 19, 21, 0.45);
+  color: var(--pitch-chalk-50);
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.alumni-group-slideshow__arrow:hover {
+  background: rgba(16, 19, 21, 0.75);
+}
+
+.alumni-group-slideshow__arrow--prev {
+  left: var(--space-4);
+}
+
+.alumni-group-slideshow__arrow--next {
+  right: var(--space-4);
+}
+
+.alumni-group-slideshow__dots {
+  position: absolute;
+  bottom: var(--space-4);
+  right: var(--space-5);
+  z-index: 3;
+  display: flex;
+  gap: var(--space-2);
+}
+
+.alumni-group-slideshow__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 246, 246, 0.6);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.alumni-group-slideshow__dot--active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .alumni-group-slideshow__frame {
+    height: min(45vh, 400px);
+  }
+
+  .alumni-group-slideshow__arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+
+  .alumni-group-slideshow__caption {
+    font-size: var(--fs-sm);
+    padding: var(--space-4) var(--space-4) var(--space-3);
+  }
+
+  .alumni-group-slideshow__dots {
+    right: var(--space-3);
+    bottom: var(--space-3);
+  }
+}

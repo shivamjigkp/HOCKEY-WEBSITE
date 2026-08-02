@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Loader from '@/components/Loader/Loader';
 import SectionDivider from '@/components/SectionDivider/SectionDivider';
+import AlumniGroupSlideshow from '@/features/alumni/components/AlumniGroupSlideshow/AlumniGroupSlideshow';
 import { getAlumni } from '@/services/alumni';
 import './Alumni.css';
 
@@ -54,6 +55,8 @@ export default function Alumni() {
             ))}
           </div>
         )}
+
+        <AlumniGroupSlideshow />
       </div>
     </div>
   );
