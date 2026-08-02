@@ -5,7 +5,7 @@ import './HeroSlideshow.css';
 const AUTOPLAY_MS = 5000;
 
 /**
- * Large photo slideshow rendered on the homepage, directly below
+ * Large photo slideshow rendered on the homepage, directly above
  * HeroSection. Content is entirely admin-controlled — see
  * Admin > Hero Slideshow (src/pages/Admin/HeroSlidesManage) and
  * services/heroSlides.js. Renders nothing while empty (no slides
@@ -60,7 +60,19 @@ export default function HeroSlideshow() {
             }
             aria-hidden={index !== activeIndex}
           >
-            <img src={slide.url} alt={slide.caption || ''} loading={index === 0 ? 'eager' : 'lazy'} />
+            <img
+              className="hero-slideshow__backdrop"
+              src={slide.url}
+              alt=""
+              aria-hidden="true"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+            <img
+              className="hero-slideshow__photo"
+              src={slide.url}
+              alt={slide.caption || ''}
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
             {slide.caption && <figcaption className="hero-slideshow__caption">{slide.caption}</figcaption>}
           </figure>
         ))}

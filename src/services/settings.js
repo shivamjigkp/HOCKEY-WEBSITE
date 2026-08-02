@@ -13,7 +13,7 @@ import { SITE_CONFIG } from '@/constants/siteConfig';
  * supabaseClient.js's placeholder fallback.
  */
 
-const DEFAULTS = {
+export const SETTINGS_DEFAULTS = {
   contactEmail: SITE_CONFIG.contactEmail,
   instagram: SITE_CONFIG.social.instagram,
   facebook: SITE_CONFIG.social.facebook,
@@ -54,7 +54,7 @@ export async function getSiteSettings() {
     const { data, error } = await supabase.from('site_settings').select('key, value');
     if (error) throw error;
 
-    const settings = { ...DEFAULTS };
+    const settings = { ...SETTINGS_DEFAULTS };
     for (const row of data) {
       const field = KEY_MAP[row.key];
       if (!field || row.value == null) continue;
@@ -62,7 +62,7 @@ export async function getSiteSettings() {
     }
     return settings;
   } catch {
-    return DEFAULTS;
+    return SETTINGS_DEFAULTS;
   }
 }
 

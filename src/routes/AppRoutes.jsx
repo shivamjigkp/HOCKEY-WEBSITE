@@ -36,6 +36,7 @@ import ContactMessagesManage from '@/pages/Admin/ContactMessagesManage/ContactMe
 import VideosManage from '@/pages/Admin/VideosManage/VideosManage';
 import HeroSlidesManage from '@/pages/Admin/HeroSlidesManage/HeroSlidesManage';
 import SquadPhotosManage from '@/pages/Admin/SquadPhotosManage/SquadPhotosManage';
+import RosterHighlightsManage from '@/pages/Admin/RosterHighlightsManage/RosterHighlightsManage';
 import SettingsManage from '@/pages/Admin/SettingsManage/SettingsManage';
 import NotFound from '@/pages/NotFound/NotFound';
 import { ROUTES } from '@/constants/routes';
@@ -99,6 +100,7 @@ export default function AppRoutes() {
           <Route path="videos" element={<VideosManage />} />
           <Route path="hero-slides" element={<HeroSlidesManage />} />
           <Route path="squad-photos" element={<SquadPhotosManage />} />
+          <Route path="roster-highlights" element={<RosterHighlightsManage />} />
           <Route path="settings" element={<SettingsManage />} />
         </Route>
 

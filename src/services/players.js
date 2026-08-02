@@ -45,6 +45,10 @@ export async function getPlayerById(playerId) {
   return mapRow(data);
 }
 
+// Not currently used by the homepage — RosterHighlights (services/rosterHighlights.js)
+// took over the "THE ROSTER" section with an admin-curated list instead.
+// Left here as a generic, reusable query in case a future screen wants an
+// auto-picked sample of players (e.g. a "Players" page spotlight).
 export async function getFeaturedPlayers(count = 4) {
   const { data, error } = await supabase
     .from('players')

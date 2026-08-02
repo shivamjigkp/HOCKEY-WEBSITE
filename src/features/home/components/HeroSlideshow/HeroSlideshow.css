@@ -14,6 +14,7 @@
 .hero-slideshow__slide {
   position: absolute;
   inset: 0;
+  z-index: 0;
   margin: 0;
   opacity: 0;
   visibility: hidden;
@@ -25,11 +26,34 @@
   visibility: visible;
 }
 
-.hero-slideshow__slide img {
+/*
+ * Two-layer image treatment so a slide always looks intentional whichever
+ * orientation an admin uploads — a landscape photo naturally fills this
+ * wide frame, but a portrait photo forced into it with object-fit: cover
+ * used to crop off most of the subject. Fix: a blurred, scaled-up copy of
+ * the same photo fills the frame edge-to-edge as a backdrop (so there's
+ * never empty letterbox space), and the real photo sits on top at
+ * object-fit: contain, so the *entire* photo is always visible, centered,
+ * uncropped — landscape or portrait.
+ */
+.hero-slideshow__backdrop {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: blur(28px) brightness(0.55) saturate(1.1);
+  transform: scale(1.15);
+  z-index: 0;
+}
+
+.hero-slideshow__photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
+  z-index: 1;
 }
 
 .hero-slideshow__slide::before {
@@ -38,6 +62,7 @@
   inset: 0;
   background: linear-gradient(180deg, rgba(16, 19, 21, 0) 55%, rgba(16, 19, 21, 0.85) 100%);
   pointer-events: none;
+  z-index: 2;
 }
 
 .hero-slideshow__caption {
@@ -45,6 +70,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 3;
   padding: var(--space-6) var(--space-6) var(--space-5);
   color: var(--pitch-chalk-50);
   font-family: var(--font-display);
@@ -59,6 +85,7 @@
   position: absolute;
   top: 50%;
   translate: 0 -50%;
+  z-index: 2;
   width: 48px;
   height: 48px;
   border-radius: 50%;

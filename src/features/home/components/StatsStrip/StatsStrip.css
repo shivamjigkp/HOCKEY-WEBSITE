@@ -1,6 +1,10 @@
+/* Always dark, regardless of the site's light/dark theme toggle — this
+   strip sits directly beneath the hero (which is also always dark) and
+   above another dark section, so a theme-dependent light background here
+   produced a jarring white band between two dark sections in light mode. */
 .stats-strip {
-  background-color: var(--color-bg-alt);
-  border-bottom: 1px solid var(--surface-border);
+  background-color: var(--pitch-charcoal-800);
+  border-bottom: 1px solid rgba(245, 246, 246, 0.08);
   padding-block: var(--space-6);
 }
 
@@ -21,13 +25,13 @@
   font-family: var(--font-display);
   font-size: var(--fs-3xl);
   font-weight: 600;
-  color: var(--color-brand-strong);
+  color: var(--pitch-gold-500);
   line-height: var(--lh-tight);
 }
 
 .stats-strip__label {
   font-size: var(--fs-sm);
-  color: var(--text-secondary);
+  color: var(--pitch-frost-300);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }

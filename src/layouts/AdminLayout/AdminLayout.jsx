@@ -15,6 +15,7 @@ const ADMIN_LINKS = [
   { label: 'Highlight Videos', to: ROUTES.ADMIN_VIDEOS },
   { label: 'Hero Slideshow', to: ROUTES.ADMIN_HERO_SLIDES },
   { label: 'Squad Photos', to: ROUTES.ADMIN_SQUAD_PHOTOS },
+  { label: 'Roster Highlights', to: ROUTES.ADMIN_ROSTER_HIGHLIGHTS },
   { label: 'Sponsors', to: ROUTES.ADMIN_SPONSORS },
   { label: 'FAQ', to: ROUTES.ADMIN_FAQ },
   { label: 'Contact Messages', to: ROUTES.ADMIN_MESSAGES },

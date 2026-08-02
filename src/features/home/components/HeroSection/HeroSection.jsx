@@ -6,16 +6,19 @@ export default function HeroSection() {
   return (
     <section className="hero">
       <div className="container hero__inner">
-        <p className="eyebrow">MMMUT Hockey — Official Platform</p>
+        <p className="eyebrow">MMMUT Hockey Club</p>
         <h1 className="hero__title">
-          Every Match. Every Milestone.
+          Building Champions.
           <br />
-          One Team.
+          Inspiring Excellence.
         </h1>
+        <p className="hero__tagline">Play. Compete. Achieve.</p>
         <span className="hero__rule" aria-hidden="true" />
         <p className="hero__subtitle">
-          From the first whistle to the final shot — follow the players, the matches,
-          and the moments that define MMMUT Hockey, all in one place.
+          Discover your potential, sharpen your skills, and embrace the spirit of teamwork. At
+          MMMUT Hockey Club, every practice, every match, and every challenge brings you one step
+          closer to excellence. Join us and be part of a legacy of passion, dedication, and
+          success.
         </p>
         <div className="hero__actions">
           <Link className="btn btn-primary" to={ROUTES.MATCHES}>
