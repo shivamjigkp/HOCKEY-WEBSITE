@@ -32,7 +32,7 @@ export default function ProtectedRoute({ children, requireAdmin = false, require
       <div className="container" style={{ paddingBlock: 'var(--space-8)', textAlign: 'center' }}>
         <p className="eyebrow">Access Denied</p>
         <h1 style={{ marginTop: 'var(--space-4)' }}>
-          {requireSuperAdmin ? 'Superadmin access required' : 'Admin access required'}
+          {requireSuperAdmin ? 'Owner access required' : 'Admin access required'}
         </h1>
         <p style={{ marginTop: 'var(--space-3)', color: 'var(--text-secondary)' }}>
           Your account doesn&apos;t have permission for this page.

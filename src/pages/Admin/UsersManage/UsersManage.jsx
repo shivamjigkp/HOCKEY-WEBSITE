@@ -7,6 +7,14 @@ import './UsersManage.css';
 
 const ROLE_OPTIONS = ['viewer', 'admin', 'superadmin'];
 
+// Display-only relabeling — the stored value is still 'superadmin' (see
+// schema_phase22.sql: the column CHECK constraint, is_superadmin(), and
+// every RLS policy that calls it all use this exact string). Renaming the
+// stored value itself would mean updating the constraint, the function,
+// and re-running a migration against every existing row — this achieves
+// the same "call it Owner" ask without that risk.
+const ROLE_LABELS = { viewer: 'Viewer', admin: 'Admin', superadmin: 'Owner' };
+
 export default function UsersManage() {
   const { user } = useAuth();
   const [users, setUsers] = useState([]);
@@ -31,7 +39,7 @@ export default function UsersManage() {
     const message =
       newRole === 'viewer'
         ? `Revoke admin access from ${targetUser.email}?`
-        : `Make ${targetUser.email} ${newRole}?`;
+        : `Make ${targetUser.email} ${ROLE_LABELS[newRole]}?`;
     if (!window.confirm(message)) return;
     setSavingId(targetUser.id);
     setError('');
@@ -50,8 +58,8 @@ export default function UsersManage() {
       <p className="eyebrow">Admin</p>
       <h1 className="admin-manage__title">Users</h1>
       <p className="admin-manage__note">
-        Only a superadmin can see this page. Granting or revoking admin access here is the only
-        way roles change — a regular admin cannot promote or demote anyone.
+        Only an Owner can see this page. Granting or revoking admin access here is the only way
+        roles change — a regular admin cannot promote or demote anyone.
       </p>
 
       {error && <p className="admin-manage__error">{error}</p>}
@@ -82,7 +90,7 @@ export default function UsersManage() {
                         : 'admin-manage__tag admin-manage__tag--completed'
                   }
                 >
-                  {u.role}
+                  {ROLE_LABELS[u.role] || u.role}
                 </span>
 
                 <select
@@ -92,7 +100,7 @@ export default function UsersManage() {
                 >
                   {ROLE_OPTIONS.map((r) => (
                     <option key={r} value={r}>
-                      {r}
+                      {ROLE_LABELS[r]}
                     </option>
                   ))}
                 </select>

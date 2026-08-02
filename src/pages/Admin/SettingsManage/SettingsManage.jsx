@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Loader from '@/components/Loader/Loader';
-import { useAuth } from '@/hooks/useAuth';
+import { ROUTES } from '@/constants/routes';
 import { getSiteSettings, updateSiteSettings } from '@/services/settings';
-import { listProfiles, updateUserRole } from '@/services/adminUsers';
 import '../adminManage.css';
-
-const ROLES = ['viewer', 'editor', 'admin'];
 
 function SiteInfoForm() {
   const [form, setForm] = useState(null);
@@ -160,92 +158,6 @@ function SiteInfoForm() {
   );
 }
 
-function AdminUsers() {
-  const { user: currentUser } = useAuth();
-  const [profiles, setProfiles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [savingId, setSavingId] = useState(null);
-
-  function load() {
-    setIsLoading(true);
-    return listProfiles()
-      .then(setProfiles)
-      .catch((err) => setError(err.message))
-      .finally(() => setIsLoading(false));
-  }
-
-  useEffect(() => {
-    load();
-  }, []);
-
-  async function handleRoleChange(profile, role) {
-    setSavingId(profile.id);
-    setError('');
-    try {
-      const updated = await updateUserRole(profile.id, role);
-      setProfiles((prev) => prev.map((p) => (p.id === profile.id ? updated : p)));
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSavingId(null);
-    }
-  }
-
-  return (
-    <>
-      <h2 className="admin-manage__list-heading">Admin Users</h2>
-      <p className="admin-manage__note">
-        Controls who can sign in to /admin. New sign-ups default to &quot;viewer&quot; (no admin
-        access) until raised here.
-      </p>
-
-      {error && <p className="admin-manage__error">{error}</p>}
-
-      {isLoading ? (
-        <Loader label="Loading users" />
-      ) : profiles.length === 0 ? (
-        <p className="admin-manage__empty">No accounts yet.</p>
-      ) : (
-        <div className="admin-manage__list">
-          {profiles.map((profile) => {
-            const isSelf = profile.id === currentUser?.id;
-            return (
-              <div key={profile.id} className="admin-manage__row">
-                <div>
-                  <p className="admin-manage__row-title">
-                    {profile.email || profile.full_name || profile.id}
-                  </p>
-                  <p className="admin-manage__row-meta">
-                    {profile.role}
-                    {isSelf ? ' · this is you' : ''}
-                  </p>
-                </div>
-                <div className="admin-manage__row-actions">
-                  <label className="admin-manage__field">
-                    <select
-                      value={profile.role}
-                      disabled={isSelf || savingId === profile.id}
-                      onChange={(e) => handleRoleChange(profile, e.target.value)}
-                      aria-label={`Role for ${profile.email || profile.id}`}
-                    >
-                      {ROLES.map((role) => (
-                        <option key={role} value={role}>
-                          {role}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </>
-  );
-}
-
 export default function SettingsManage() {
   return (
     <div className="admin-manage">
@@ -253,7 +165,17 @@ export default function SettingsManage() {
       <h1 className="admin-manage__title">Settings</h1>
 
       <SiteInfoForm />
-      <AdminUsers />
+
+      <div className="admin-manage__form">
+        <h2>Admin Users</h2>
+        <p className="admin-manage__note">
+          Managing who has admin access moved to its own page — only an Owner can grant or
+          revoke it there.
+        </p>
+        <Link to={ROUTES.ADMIN_USERS} className="btn btn-outline">
+          Go to Users
+        </Link>
+      </div>
     </div>
   );
 }
