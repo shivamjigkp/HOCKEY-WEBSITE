@@ -6,20 +6,6 @@ import { PLAYER_POSITION_LABELS } from '@/constants/playerPositions';
 import { getPlayerById } from '@/services/players';
 import './PlayerDetails.css';
 
-const GOALKEEPER_STAT_LABELS = {
-  gamesPlayed: 'Games Played',
-  saves: 'Saves',
-  goalsConceded: 'Goals Conceded',
-  cleanSheets: 'Clean Sheets',
-};
-
-const OUTFIELD_STAT_LABELS = {
-  gamesPlayed: 'Games Played',
-  goals: 'Goals',
-  assists: 'Assists',
-  points: 'Points',
-};
-
 export default function PlayerDetails() {
   const { playerId } = useParams();
   const navigate = useNavigate();
@@ -62,8 +48,6 @@ export default function PlayerDetails() {
     );
   }
 
-  const statLabels = player.position === 'goalkeeper' ? GOALKEEPER_STAT_LABELS : OUTFIELD_STAT_LABELS;
-
   return (
     <div className="player-details">
       <div className="container">
@@ -91,16 +75,32 @@ export default function PlayerDetails() {
           </div>
         </div>
 
-        <p className="player-details__bio">{player.bio}</p>
+        {player.bio && <p className="player-details__bio">{player.bio}</p>}
 
-        <div className="player-details__stats">
-          {Object.entries(statLabels).map(([key, label]) => (
-            <div className="player-details__stat" key={key}>
-              <span className="player-details__stat-value">{player.stats?.[key] ?? '—'}</span>
-              <span className="player-details__stat-label">{label}</span>
-            </div>
-          ))}
-        </div>
+        {(player.linkedinUrl || player.githubUrl) && (
+          <div className="player-details__links">
+            {player.linkedinUrl && (
+              <a
+                href={player.linkedinUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn btn-outline"
+              >
+                LinkedIn
+              </a>
+            )}
+            {player.githubUrl && (
+              <a
+                href={player.githubUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn btn-outline"
+              >
+                GitHub
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

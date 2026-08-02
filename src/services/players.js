@@ -25,6 +25,8 @@ function mapRow(row) {
     heightCm: row.height_cm,
     photoUrl: row.photo_url,
     bio: row.bio,
+    linkedinUrl: row.linkedin_url,
+    githubUrl: row.github_url,
     stats: row.stats ?? {},
   };
 }
@@ -76,6 +78,8 @@ export async function createPlayer({
   heightCm,
   photoUrl,
   bio,
+  linkedinUrl,
+  githubUrl,
   stats,
 }) {
   const { data, error } = await supabase
@@ -90,6 +94,8 @@ export async function createPlayer({
       height_cm: heightCm || null,
       photo_url: photoUrl || null,
       bio,
+      linkedin_url: linkedinUrl || null,
+      github_url: githubUrl || null,
       stats: stats ?? {},
     })
     .select()
@@ -112,6 +118,8 @@ export async function updatePlayer(id, payload) {
       height_cm: payload.heightCm || null,
       photo_url: payload.photoUrl || null,
       bio: payload.bio,
+      linkedin_url: payload.linkedinUrl || null,
+      github_url: payload.githubUrl || null,
       stats: payload.stats ?? {},
       updated_at: new Date().toISOString(),
     })

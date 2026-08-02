@@ -15,6 +15,8 @@ const EMPTY_FORM = {
   heightCm: '',
   photoUrl: '',
   bio: '',
+  linkedinUrl: '',
+  githubUrl: '',
 };
 
 export default function PlayersManage() {
@@ -53,6 +55,8 @@ export default function PlayersManage() {
       heightCm: player.heightCm != null ? String(player.heightCm) : '',
       photoUrl: player.photoUrl ?? '',
       bio: player.bio ?? '',
+      linkedinUrl: player.linkedinUrl ?? '',
+      githubUrl: player.githubUrl ?? '',
     });
   }
 
@@ -176,6 +180,26 @@ export default function PlayersManage() {
         <label className="admin-manage__field">
           <span>Bio</span>
           <textarea rows={4} value={form.bio} onChange={handleChange('bio')} />
+        </label>
+
+        <label className="admin-manage__field">
+          <span>LinkedIn URL</span>
+          <input
+            type="url"
+            placeholder="https://linkedin.com/in/..."
+            value={form.linkedinUrl}
+            onChange={handleChange('linkedinUrl')}
+          />
+        </label>
+
+        <label className="admin-manage__field">
+          <span>GitHub URL</span>
+          <input
+            type="url"
+            placeholder="https://github.com/..."
+            value={form.githubUrl}
+            onChange={handleChange('githubUrl')}
+          />
         </label>
 
         <div className="admin-manage__form-actions">
