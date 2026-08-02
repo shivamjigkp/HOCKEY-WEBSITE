@@ -1,0 +1,119 @@
+.match-details {
+  padding-block: var(--space-8);
+  min-height: 60vh;
+}
+
+.match-details--empty {
+  text-align: center;
+  padding-block: var(--space-9);
+}
+
+.match-details__back {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  margin-bottom: var(--space-5);
+}
+
+.match-details__back:hover {
+  color: var(--text-primary);
+}
+
+.match-details__scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  text-align: center;
+}
+
+.match-details__vs {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.match-details__score {
+  font-size: var(--fs-2xl);
+  color: var(--pitch-gold-500);
+}
+
+.match-details__meta {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  margin-top: var(--space-3);
+}
+
+.match-details__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+.match-details__section {
+  background: var(--surface-card, var(--pitch-charcoal-800));
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.match-details__section h2 {
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-3);
+}
+
+.match-details__section p {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.match-details__empty {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.match-details__related {
+  margin-top: var(--space-8);
+}
+
+.match-details__related h2 {
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-4);
+}
+
+.match-details__related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.match-details__related-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.match-details__related-card:hover {
+  border-color: var(--pitch-green-600);
+}
+
+@media (max-width: 768px) {
+  .match-details__grid,
+  .match-details__related-grid {
+    grid-template-columns: 1fr;
+  }
+}

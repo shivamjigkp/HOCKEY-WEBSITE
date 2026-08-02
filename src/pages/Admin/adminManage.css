@@ -1,0 +1,179 @@
+.admin-manage__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  margin-top: var(--space-2);
+}
+
+.admin-manage__note {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-6);
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  max-width: 60ch;
+}
+
+.admin-manage__error {
+  color: var(--color-danger, var(--pitch-error-500));
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-sm);
+}
+
+.admin-manage__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card, var(--pitch-charcoal-800));
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-7);
+}
+
+.admin-manage__form h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+}
+
+.admin-manage__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.admin-manage__field input,
+.admin-manage__field select,
+.admin-manage__field textarea {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-alt);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  resize: vertical;
+}
+
+.admin-manage__form-actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.admin-manage__list-heading {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-4);
+}
+
+.admin-manage__empty {
+  color: var(--text-secondary);
+}
+
+.admin-manage__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.admin-manage__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card, var(--pitch-charcoal-800));
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-manage__row-title {
+  font-family: var(--font-display);
+}
+
+.admin-manage__row-meta {
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  margin-top: var(--space-1);
+  text-transform: capitalize;
+}
+
+.admin-manage__row-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.admin-manage__tag {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: rgba(5, 141, 77, 0.15);
+  color: var(--color-brand);
+  border: 1px solid rgba(5, 141, 77, 0.3);
+}
+
+.admin-manage__tag--live {
+  background: rgba(220, 38, 38, 0.15);
+  color: #f87171;
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.admin-manage__tag--completed {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border-color: var(--surface-border);
+}
+
+/* Live-score quick control */
+.admin-manage__live-panel {
+  padding: var(--space-5);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: var(--radius-lg);
+  background: rgba(220, 38, 38, 0.06);
+  margin-bottom: var(--space-7);
+}
+
+.admin-manage__live-panel h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  color: #f87171;
+}
+
+.admin-manage__live-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .admin-manage__row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.admin-manage__color-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.admin-manage__color-field input[type='color'] {
+  width: 48px;
+  height: 40px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.admin-manage__color-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}

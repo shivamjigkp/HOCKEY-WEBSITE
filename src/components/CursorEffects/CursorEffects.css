@@ -1,0 +1,78 @@
+/*
+  Custom cursor layer. Positioned once at (0, 0) and moved entirely via
+  transform: translate3d() from CursorEffects.jsx's rAF loop — never via
+  top/left, so the browser can composite it on the GPU instead of
+  triggering layout on every mouse move.
+*/
+
+.cursor-fx {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  transition: width var(--duration-fast) var(--ease-standard),
+    height var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-base) var(--ease-standard);
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: var(--color-highlight);
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 1.5px solid var(--color-highlight);
+  box-shadow: 0 0 24px 4px color-mix(in srgb, var(--color-highlight) 45%, transparent);
+}
+
+/* Hover expansion — cursor grows over links, buttons, and form fields */
+.cursor-dot--hover {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+}
+
+.cursor-ring--hover {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  background: color-mix(in srgb, var(--color-highlight) 12%, transparent);
+}
+
+/* Click feedback — brief pointer transformation on press */
+.cursor-dot--active {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+}
+
+.cursor-ring--active {
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+}
+
+/* Hide the native cursor while the custom one is active — but keep it on
+   form fields so people still get the familiar text (I-beam) cursor
+   while typing. Accessibility over aesthetics here. */
+.cursor-fx-active,
+.cursor-fx-active a,
+.cursor-fx-active button,
+.cursor-fx-active .btn {
+  cursor: none;
+}

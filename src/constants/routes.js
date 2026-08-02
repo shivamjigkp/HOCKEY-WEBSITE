@@ -1,0 +1,48 @@
+/**
+ * Central route path registry.
+ * Import these constants instead of hardcoding path strings in components,
+ * so link targets and <Route> definitions can never drift out of sync.
+ */
+export const ROUTES = {
+  HOME: '/',
+  NOT_FOUND: '*',
+
+  // Registered here now so Navbar links and future route definitions
+  // (added phase-by-phase) share one source of truth from day one.
+  ABOUT: '/about',
+  PLAYERS: '/players',
+  PLAYER_DETAILS: '/players/:playerId',
+  COACHES: '/coaches',
+  MATCHES: '/matches',
+  MATCH_DETAILS: '/matches/:matchId',
+  TOURNAMENT_HISTORY: '/tournament-history',
+  RESULTS: '/results',
+  LIVE: '/live',
+  VIDEOS: '/videos',
+  GALLERY: '/gallery',
+  GALLERY_ALBUM: '/gallery/:albumSlug',
+  GALLERY_MANAGE: '/gallery/manage',
+  NEWS: '/news',
+  NEWS_DETAILS: '/news/:newsId',
+  EVENTS: '/events',
+  ACHIEVEMENTS: '/achievements',
+  STATISTICS: '/statistics',
+  CONTACT: '/contact',
+  FAQ: '/faq',
+  LOGIN: '/login',
+  SIGNUP: '/signup',
+  ADMIN: '/admin',
+  ADMIN_NEWS: '/admin/news',
+  ADMIN_EVENTS: '/admin/events',
+  ADMIN_PLAYERS: '/admin/players',
+  ADMIN_COACHES: '/admin/coaches',
+  ADMIN_MATCHES: '/admin/matches',
+  ADMIN_ACHIEVEMENTS: '/admin/achievements',
+  ADMIN_SPONSORS: '/admin/sponsors',
+  ADMIN_FAQ: '/admin/faq',
+  ADMIN_MESSAGES: '/admin/messages',
+  ADMIN_VIDEOS: '/admin/videos',
+  ADMIN_HERO_SLIDES: '/admin/hero-slides',
+  ADMIN_SQUAD_PHOTOS: '/admin/squad-photos',
+  ADMIN_SETTINGS: '/admin/settings',
+};

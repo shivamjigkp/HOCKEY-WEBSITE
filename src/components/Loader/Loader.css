@@ -1,0 +1,26 @@
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+}
+
+.loader__ball {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  animation: ballBounce 900ms var(--ease-standard) infinite;
+}
+
+@keyframes ballBounce {
+  0%,
+  100% {
+    transform: translateX(-16px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(16px);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,30 @@
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-block: var(--space-8);
+}
+
+.section-divider__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--surface-border) 20%,
+    var(--surface-border) 80%,
+    transparent
+  );
+}
+
+.section-divider__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  flex-shrink: 0;
+}
+
+.section-divider__label {
+  white-space: nowrap;
+}

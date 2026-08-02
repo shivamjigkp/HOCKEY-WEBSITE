@@ -1,0 +1,71 @@
+/*
+  THEME LAYER
+  Maps semantic tokens to raw palette values from variables.css.
+  Components should ONLY consume --color-* / --surface-* / --text-* tokens,
+  never the raw --pitch-* values directly, so themes stay swappable.
+
+  Note on --color-accent: gold fails WCAG contrast as text on light
+  backgrounds, so light mode intentionally uses a darker gold (800/900)
+  than dark mode (500/600) — same brand color, tuned per-theme for
+  legibility. See src/styles/variables.css for the full contrast rationale.
+*/
+
+/* Light mode = "Day Pitch": bright turf, chalked lines, crisp look */
+:root,
+[data-theme='light'] {
+  --color-bg: var(--pitch-chalk-100);
+  --color-bg-alt: var(--pitch-chalk-50);
+  --surface-1: var(--pitch-chalk-50);
+  --surface-2: var(--pitch-frost-200);
+  --surface-border: var(--pitch-frost-300);
+  /* Cards (news, matches, achievements, admin panels, etc.) all read this
+     via `var(--surface-card, var(--pitch-charcoal-800))`. It was never
+     actually defined here, so every card silently fell back to the dark
+     charcoal color in BOTH themes — invisible/low-contrast text in Light
+     mode was this bug. Defined properly now, plus tuned to a soft
+     sage-white (chalk-150) rather than stark white so cards read as a
+     distinct layer against the page background. */
+  --surface-card: var(--pitch-chalk-150);
+
+  --text-primary: var(--pitch-charcoal-900);
+  --text-secondary: var(--pitch-steel-500);
+  --text-inverse: var(--pitch-chalk-50);
+
+  --color-brand: var(--pitch-green-700);
+  --color-brand-strong: var(--pitch-green-800);
+  --color-accent: var(--pitch-gold-800);
+  --color-accent-strong: var(--pitch-gold-900);
+  --color-highlight: var(--pitch-gold-500);
+
+  --color-success: #1b8a5a;
+  --color-danger: var(--pitch-error-600);
+  --color-warning: #b8860b;
+
+  color-scheme: light;
+}
+
+/* Dark mode = "Under Lights": charcoal stands, floodlit turf, brighter accents */
+[data-theme='dark'] {
+  --color-bg: var(--pitch-charcoal-900);
+  --color-bg-alt: var(--pitch-charcoal-800);
+  --surface-1: var(--pitch-charcoal-800);
+  --surface-2: var(--pitch-charcoal-700);
+  --surface-border: rgba(223, 233, 242, 0.12);
+  --surface-card: var(--pitch-charcoal-800);
+
+  --text-primary: var(--pitch-chalk-100);
+  --text-secondary: var(--pitch-frost-300);
+  --text-inverse: var(--pitch-charcoal-900);
+
+  --color-brand: var(--pitch-green-500);
+  --color-brand-strong: var(--pitch-green-600);
+  --color-accent: var(--pitch-gold-500);
+  --color-accent-strong: var(--pitch-gold-600);
+  --color-highlight: var(--pitch-gold-500);
+
+  --color-success: #2fbf83;
+  --color-danger: var(--pitch-error-500);
+  --color-warning: #e0b23c;
+
+  color-scheme: dark;
+}

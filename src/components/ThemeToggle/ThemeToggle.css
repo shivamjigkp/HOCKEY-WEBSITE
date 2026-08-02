@@ -1,0 +1,58 @@
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+}
+
+.theme-toggle__track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 48px;
+  height: 24px;
+  padding-inline: 5px;
+  background-color: var(--surface-2);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-pill);
+  transition: background-color var(--duration-base) var(--ease-standard);
+}
+
+/* Static, dimmed sun/moon glyphs at each end of the track — always
+   visible so the toggle reads as "light \u2194 dark" at a glance, not just
+   a generic on/off switch. */
+.theme-toggle__icon {
+  position: relative;
+  z-index: 0;
+  color: var(--text-secondary);
+  opacity: 0.55;
+}
+
+.theme-toggle__icon--sun {
+  margin-right: auto;
+}
+
+.theme-toggle__icon--moon {
+  margin-left: auto;
+}
+
+.theme-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-highlight);
+  color: var(--pitch-charcoal-900);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-base) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard);
+}
+
+[data-theme='dark'] .theme-toggle__thumb {
+  transform: translateX(24px);
+  background-color: var(--pitch-charcoal-700);
+  color: var(--color-highlight);
+}

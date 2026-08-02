@@ -1,0 +1,39 @@
+.cta-banner {
+  background: linear-gradient(160deg, var(--pitch-charcoal-800) 0%, var(--pitch-charcoal-900) 100%);
+  padding-block: var(--space-9);
+}
+
+.cta-banner__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.cta-banner__title {
+  color: var(--pitch-chalk-100);
+}
+
+.cta-banner__subtitle {
+  color: var(--pitch-frost-300);
+}
+
+.cta-banner__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cta-banner__actions .btn-outline {
+  color: var(--pitch-chalk-100);
+  border-color: var(--pitch-frost-300);
+}
+
+.cta-banner__actions .btn-outline:hover {
+  color: var(--pitch-chalk-50);
+  border-color: var(--pitch-chalk-50);
+}

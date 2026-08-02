@@ -1,0 +1,124 @@
+.footer {
+  margin-top: var(--space-10);
+  background-color: var(--pitch-charcoal-900);
+  color: var(--pitch-frost-300);
+  border-top: 3px solid var(--color-brand);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-7);
+  padding-block: var(--space-8);
+}
+
+.footer__brand-mark {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+}
+
+.footer__brand p {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  color: var(--pitch-chalk-100);
+  margin-top: var(--space-3);
+}
+
+.footer__tagline {
+  font-family: var(--font-body);
+  text-transform: none;
+  color: var(--pitch-frost-300);
+  font-size: var(--fs-sm);
+  margin-top: var(--space-2);
+}
+
+.footer__email {
+  display: inline-block;
+  font-family: var(--font-body);
+  text-transform: none;
+  font-size: var(--fs-sm);
+  color: var(--pitch-gold-500);
+  margin-top: var(--space-3);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer__email:hover {
+  color: var(--color-brand);
+}
+
+.footer__social {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.footer__social a {
+  font-size: var(--fs-sm);
+  color: var(--pitch-frost-300);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer__social a:hover {
+  color: var(--color-brand);
+}
+
+.footer__heading {
+  font-size: var(--fs-sm);
+  color: var(--pitch-chalk-100);
+  margin-bottom: var(--space-4);
+}
+
+.footer__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__col a {
+  font-size: var(--fs-sm);
+  color: var(--pitch-frost-300);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer__col a:hover {
+  color: var(--color-brand);
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-5);
+  border-top: 1px solid rgba(223, 233, 242, 0.12);
+  font-size: var(--fs-xs);
+}
+
+.footer__credits a {
+  color: var(--pitch-frost-300);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer__credits a:hover {
+  color: var(--color-brand);
+}
+
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+  }
+}

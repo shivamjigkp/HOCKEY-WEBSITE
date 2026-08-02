@@ -1,0 +1,103 @@
+.tournament-history-page {
+  padding-block: var(--space-8);
+  min-height: 60vh;
+}
+
+.tournament-history-page__title {
+  font-size: var(--fs-3xl);
+  margin-top: var(--space-2);
+}
+
+.tournament-history-page__empty {
+  color: var(--text-secondary);
+  padding-block: var(--space-7);
+  text-align: center;
+}
+
+.tournament-history-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.tournament-card {
+  background: var(--surface-card, var(--pitch-charcoal-800));
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.tournament-card__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.tournament-card__name {
+  font-size: var(--fs-lg);
+  color: var(--text-primary);
+}
+
+.tournament-card__meta {
+  margin-top: var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.tournament-card__chevron {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.tournament-card__matches {
+  list-style: none;
+  border-top: 1px solid var(--surface-border);
+}
+
+.tournament-card__match {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--fs-sm);
+}
+
+.tournament-card__match + .tournament-card__match {
+  border-top: 1px solid var(--surface-border);
+}
+
+.tournament-card__match-date {
+  color: var(--text-secondary);
+}
+
+.tournament-card__match-teams {
+  text-align: center;
+}
+
+.tournament-card__match-venue {
+  text-align: right;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .tournament-card__match {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .tournament-card__match-venue {
+    text-align: center;
+  }
+}

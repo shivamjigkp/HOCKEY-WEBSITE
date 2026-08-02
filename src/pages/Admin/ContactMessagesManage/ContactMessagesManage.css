@@ -1,0 +1,27 @@
+.contact-message {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.contact-message--unread {
+  border-left: 3px solid var(--color-brand);
+}
+
+.contact-message__body {
+  width: 100%;
+}
+
+.contact-message__email {
+  font-weight: 400;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.contact-message__text {
+  margin-top: var(--space-2);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  white-space: pre-wrap;
+}

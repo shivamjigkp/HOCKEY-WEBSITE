@@ -1,0 +1,45 @@
+/*
+  Breakpoint reference (kept in sync with variables.css --bp-* tokens):
+  mobile  : up to 480px
+  tablet  : 481px  - 768px
+  laptop  : 769px  - 1024px
+  desktop : 1025px+
+
+  Component CSS files should hardcode these px values in their own
+  media queries (CSS cannot consume var() inside @media conditions).
+*/
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding-inline: var(--space-5);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--space-4);
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+.show-mobile {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .show-mobile {
+    display: revert !important;
+  }
+}
